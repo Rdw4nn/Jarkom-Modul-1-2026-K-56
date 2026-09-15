@@ -2,7 +2,7 @@
 
 | No  | Nama                           | NRP        |
 | --- | ------------------------------ | ---------- |
-| 1   | Revalinda Bunga Nayla Laksono  | 5027251037 |
+| 1   | Sahira Bilqis Rivadito         | 5027251037 |
 | 2   | Muhammmad Ridwan               | 5027251113 |
 
 HAI BOS BEKASI
