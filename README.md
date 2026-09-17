@@ -168,3 +168,81 @@ Berikut LAngkahnya :
 11. Setelah semua jawaban benar, akan muncul flag:
 
     `flag : Congratulations! Here is your flag: KOMJAR26{...}`
+
+
+# S0AL 18 | SMB Transfer
+
+Pada soal ini dilakukan analisis terhadap file capture `wired_smb_transfer.pcapng` menggunakan Wireshark untuk mengidentifikasi aktivitas transfer file malware melalui protokol SMB.
+
+Informasi yang dicari meliputi:
+
+- Nama protokol jaringan yang dieksploitasi
+- IP address pengirim
+- IP address penerima
+- Folder tujuan penyimpanan malware pada sistem korban
+- Nama file executable malware yang ditransfer
+
+Hasil analisis kemudian divalidasi menggunakan socket server melalui `nc [IP_GROUP] 3405`.
+
+Berikut LAngkahnya :
+
+1. Open `wired_smb_transfer.pcapng` menggunakan Wireshark.
+
+2. Karena soal meminta analisis lalu lintas SMB, input `smb2` pada **Display Filter**.
+
+3. Dari hasil filter, terlihat komunikasi menggunakan protokol **SMB2**.
+
+4. Untuk melihat proses transfer file, perhatikan packet yang memiliki informasi seperti:
+
+   `Create Request`
+
+   `Write Request`
+
+   `Close Request`
+
+5. Pada packet **Create Request** ditemukan:
+
+   `Create Request, File: System32\wired_trojan_payload.exe`
+
+   Dari informasi tersebut dapat diketahui folder tujuan penyimpanan malware adalah:
+
+   `System32`
+
+6. Pada packet tersebut juga dapat dilihat alamat IP:
+
+   `Src: 10.7.3.100`
+
+   `Dst: 10.7.1.50`
+
+   Namun, untuk menentukan pengirim dan penerima file, perhatikan alur transfer pada packet **Write Request**. File ditransfer dari sistem attacker menuju sistem korban.
+
+7. Dari alur komunikasi SMB pada capture, diperoleh:
+
+   - IP Pengirim: `10.7.1.50`
+   - IP Penerima: `10.7.3.100`
+
+8. Nama file executable malware yang ditransfer adalah:
+
+   `wired_trojan_payload.exe`
+
+9. Pada proses **Tree Connect** juga terlihat akses ke administrative share:
+
+   `\\10.7.1.50\ADMIN$`
+
+   Kemudian file ditulis pada lokasi:
+
+   `System32\wired_trojan_payload.exe`
+
+10. Setelah mendapatkan seluruh informasi yang diperlukan, buka terminal dan jalankan:
+
+    `nc [IP_GROUP] 3405`
+
+    Gunakan `IP_GROUP` yang telah disediakan di mastersheet karena kelompok yang digunakan adalah **Group C**.
+
+11. Jawab seluruh pertanyaan dari socket server menggunakan informasi yang telah diperoleh dari hasil analisis Wireshark.
+
+12. Setelah semua jawaban benar, akan muncul flag:
+
+    `flag : Congratulations! Here is your flag: KOMJAR26{...}`
+
+    
