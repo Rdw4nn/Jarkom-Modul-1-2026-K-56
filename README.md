@@ -104,3 +104,67 @@ Berikut LAngkahnya :
 15. Setelah semua jawaban benar, akan muncul flag:
 
     `flag : Congratulations! Here is your flag: KOMJAR26{...}`
+
+
+# S0AL 17 | HTTP C2
+
+Pada soal ini dilakukan analisis terhadap file capture `wired_http_c2.pcap` menggunakan Wireshark untuk mengidentifikasi aktivitas HTTP yang dilakukan oleh attacker dalam mengunduh payload berbahaya ke sistem Alice.
+Informasi yang dicari meliputi:
+
+- Nama domain (Host) tempat malware diunduh
+- IP address server penyerang
+- Nama file executable malware yang diunduh
+- Kode status HTTP yang dikembalikan
+
+Hasil analisis kemudian divalidasi menggunakan socket server melalui `nc [IP_GROUP] 3404`.
+
+Berikut LAngkahnya :
+1. Open `wired_http_c2.pcap` menggunakan Wireshark.
+2. Karena soal meminta analisis lalu lintas HTTP, input `http` pada **Display Filter**.
+3. Untuk mencari file executable malware yang diunduh, gunakan Display Filter:
+   `http.request.uri contains ".exe"`
+
+4. Dari hasil filter, ditemukan packet dengan request:
+   `GET /navi_agent.exe HTTP/1.1`
+
+5. Buka bagian **Hypertext Transfer Protocol** pada packet tersebut. Dari bagian tersebut dapat ditemukan:
+   `Host: wired-update.net`
+
+   Sehingga nama domain tempat malware diunduh adalah:
+
+   `wired-update.net`
+
+6. Dari packet tersebut juga dapat diketahui alamat IP server penyerang. Pada bagian **Internet Protocol Version 4** terlihat:
+   `Src: 10.7.1.50`
+
+   `Dst: 203.0.113.42`
+
+   Karena request dikirim dari Alice menuju server, maka IP server penyerang adalah:
+
+   `203.0.113.42`
+
+7. Dari request HTTP juga ditemukan nama file executable yang diunduh:
+
+   `navi_agent.exe`
+
+8. Selanjutnya periksa packet response setelah request `GET /navi_agent.exe HTTP/1.1`.
+
+   Pada packet tersebut terdapat:
+
+   `HTTP/1.1 200 OK`
+
+   Sehingga kode status HTTP yang dikembalikan adalah:
+
+   `200 OK`
+
+9. Setelah mendapatkan seluruh informasi yang diperlukan, buka terminal dan jalankan:
+
+   `nc [IP_GROUP] 3404`
+
+   Gunakan `IP_GROUP` yang telah disediakan di mastersheet karena kelompok yang digunakan adalah **Group C**.
+
+10. Jawab seluruh pertanyaan dari socket server menggunakan informasi yang telah diperoleh dari hasil analisis Wireshark.
+
+11. Setelah semua jawaban benar, akan muncul flag:
+
+    `flag : Congratulations! Here is your flag: KOMJAR26{...}`
