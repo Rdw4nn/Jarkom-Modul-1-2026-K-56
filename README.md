@@ -325,6 +325,8 @@ Hasil analisis kemudian divalidasi menggunakan socket server melalui `nc [IP_GRO
 
 Berikut LAngkahnya :
 
+0. Jangan lupa input keylogsfile.txt nya dulu nanti yeu (liat gpt langkahnya - pesan untuk gw)
+
 1. Open `wired_tls_decrypt.pcapng` menggunakan Wireshark.
 
 2. Karena soal meminta analisis lalu lintas TLS, input `tls` pada **Display Filter**.
