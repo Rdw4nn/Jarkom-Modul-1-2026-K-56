@@ -245,4 +245,157 @@ Berikut LAngkahnya :
 
     `flag : Congratulations! Here is your flag: KOMJAR26{...}`
 
-    
+# S0AL 19 | SMTP Threat
+
+Pada soal ini dilakukan analisis terhadap file capture `wired_smtp_threat.pcap` menggunakan Wireshark untuk mengidentifikasi email pemerasan yang dikirim oleh attacker melalui protokol SMTP tanpa enkripsi.
+
+Informasi yang dicari meliputi:
+
+- Alamat email korban yang ditargetkan
+- Password korban yang diklaim bocor oleh penyerang
+- Jenis malware yang menginfeksi korban
+- Batas waktu yang diberikan oleh penyerang dalam satuan hari
+- MailClientID yang tercantum pada pesan
+
+Hasil analisis kemudian divalidasi menggunakan socket server melalui `nc [IP_GROUP] 3406`.
+
+Berikut LAngkahnya :
+
+1. Open `wired_smtp_threat.pcap` menggunakan Wireshark.
+
+2. Karena soal meminta analisis lalu lintas SMTP, input `smtp` pada **Display Filter**.
+
+3. Dari hasil filter, cari packet yang berisi komunikasi SMTP, terutama packet dengan informasi seperti:
+
+   `MAIL FROM`
+
+   `RCPT TO`
+
+   `DATA`
+
+4. Karena email dikirim menggunakan SMTP tanpa enkripsi, isi pesan dapat dianalisis melalui TCP Stream.
+
+5. Klik salah satu packet SMTP yang berkaitan dengan email tersebut, kemudian klik kanan pada packet dan pilih:
+
+   **Follow → TCP Stream**
+
+6. Pada TCP Stream, cari bagian isi email setelah perintah:
+
+   `DATA`
+
+   Bagian tersebut berisi pesan pemerasan yang dikirim oleh attacker kepada korban.
+
+7. Dari isi pesan tersebut, identifikasi alamat email korban yang ditargetkan.
+
+8. Selanjutnya cari informasi password korban yang diklaim bocor oleh penyerang di dalam isi pesan.
+
+9. Cari juga informasi mengenai jenis malware yang disebutkan telah menginfeksi sistem korban.
+
+10. Identifikasi batas waktu yang diberikan oleh penyerang kepada korban. Catat nilainya dalam satuan hari.
+
+11. Pada isi email juga terdapat `MailClientID`. Catat nilai `MailClientID` tersebut sesuai dengan yang tercantum pada pesan.
+
+12. Setelah mendapatkan seluruh informasi yang diperlukan, buka terminal dan jalankan:
+
+    `nc [IP_GROUP] 3406`
+
+    Gunakan `IP_GROUP` yang telah disediakan di mastersheet karena kelompok yang digunakan adalah **Group C**.
+
+13. Jawab seluruh pertanyaan dari socket server menggunakan informasi yang telah diperoleh dari analisis TCP Stream pada Wireshark.
+
+14. Setelah semua jawaban benar, akan muncul flag:
+
+    `flag : Congratulations! Here is your flag: KOMJAR26{...}`
+
+
+    # S0AL 20 | TLS Decrypt
+
+Pada soal ini dilakukan analisis terhadap file capture `wired_tls_decrypt.pcapng` menggunakan Wireshark dengan bantuan `keyslogfile.txt` untuk mendekripsi lalu lintas TLS dan mengidentifikasi komunikasi HTTP yang tersembunyi di dalam sesi terenkripsi.
+
+Informasi yang dicari meliputi:
+
+- Versi protokol TLS yang dinegosiasikan
+- Nama domain (SNI) yang diakses
+- IP address server HTTPS penyerang
+- User-Agent yang digunakan oleh client
+- HTTP request method
+- HTTP request path
+
+Hasil analisis kemudian divalidasi menggunakan socket server melalui `nc [IP_GROUP] 3407`.
+
+Berikut LAngkahnya :
+
+1. Open `wired_tls_decrypt.pcapng` menggunakan Wireshark.
+
+2. Karena soal meminta analisis lalu lintas TLS, input `tls` pada **Display Filter**.
+
+3. Dari packet **Client Hello**, dapat dilihat informasi **Server Name (SNI)** yang diakses oleh client.
+
+4. Pada packet **Client Hello** ditemukan:
+
+   `Client Hello (SNI=example.com)`
+
+   Sehingga nama domain yang diakses adalah:
+
+   `example.com`
+
+5. Dari bagian **Internet Protocol Version 4** pada packet TLS dapat diketahui alamat IP server HTTPS.
+
+   Source:
+
+   `10.9.0.2`
+
+   Destination:
+
+   `93.184.216.34`
+
+   Sehingga IP server HTTPS adalah:
+
+   `93.184.216.34`
+
+6. Dari hasil analisis packet TLS juga diketahui versi protokol yang digunakan:
+
+   `TLSv1.2`
+
+7. Karena isi HTTP berada di dalam koneksi TLS, diperlukan file keylog untuk melakukan dekripsi.
+
+8. Buka:
+
+   **Edit → Preferences → Protocols → TLS**
+
+9. Pada bagian:
+
+   **(Pre)-Master-Secret log filename**
+
+   klik **Browse...**, kemudian pilih:
+
+   `keyslogfile.txt`
+
+10. Klik **OK**, kemudian reload atau buka kembali file:
+
+    `wired_tls_decrypt.pcapng`
+
+11. Setelah keylog berhasil digunakan, masukkan `http` pada **Display Filter** untuk menampilkan lalu lintas HTTP yang telah berhasil didekripsi.
+
+12. Pilih packet **HTTP Request**, kemudian buka bagian **Hypertext Transfer Protocol**.
+
+13. Dari bagian tersebut dapat ditemukan **User-Agent** yang digunakan oleh client.
+
+14. Pada bagian HTTP Request juga dapat diketahui:
+
+    - HTTP Request Method
+    - HTTP Request URI / Path
+
+15. Catat seluruh informasi yang diperlukan sesuai dengan pertanyaan pada socket server.
+
+16. Setelah mendapatkan seluruh informasi, buka terminal dan jalankan:
+
+    `nc [IP_GROUP] 3407`
+
+    Gunakan `IP_GROUP` yang telah disediakan di mastersheet karena kelompok yang digunakan adalah **Group C**.
+
+17. Jawab seluruh pertanyaan dari socket server menggunakan informasi yang telah diperoleh dari hasil analisis Wireshark.
+
+18. Setelah semua jawaban benar, akan muncul flag:
+
+    `flag : Congratulations! Here is your flag: KOMJAR26{...}`
