@@ -10,7 +10,7 @@ HAI BOS BEKASI
 
 
 
-# Protocol 7 - Brute Force Analysis
+# S0AL 14 | PROtocol 7
 
 ## 1. Deskripsi
 
@@ -29,19 +29,3 @@ Hasil analisis kemudian divalidasi menggunakan socket server melalui `nc`.
 
 ---
 
-## 2. Tools yang Digunakan
-
-- **Wireshark** - untuk menganalisis network packet capture
-- **Netcat (nc)** - untuk melakukan validasi jawaban melalui socket server
-- File capture: `wired_bruteforce.pcapng`
-
----
-
-## 3. Analisis PCAP
-
-### 3.1 Mencari HTTP POST Request
-
-Karena serangan dilakukan terhadap form login web, langkah pertama adalah mencari HTTP POST request menggunakan filter:
-
-```text
-http.request.method == "POST"
