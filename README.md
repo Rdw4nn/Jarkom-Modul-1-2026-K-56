@@ -31,4 +31,4 @@ Berikut LAngkahnya :
 5. Open terminal, put `nc [IP_GROUP C] 3401` dan gunakan ip_group_c yang telah di sediakan di mastersheet (karna kita group c).
 6. Jawab semua pertanyaan dengan semua informasi yang telah kamu dapatkan
 
-7. nanti gambar
+7. nanti gambar + `flag : Congratulations! Here is your flag: KOMJAR26{W1r3d_Brut3_1bBmXXuaxjlV9hNvBrTk60Bcl} `
