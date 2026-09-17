@@ -11,10 +11,7 @@ HAI BOS BEKASI
 
 
 # S0AL 14 | PROtocol 7
-
-## 1. Deskripsi
-
-Pada tugas ini dilakukan analisis terhadap file capture `wired_bruteforce.pcapng` menggunakan Wireshark untuk mengidentifikasi aktivitas brute-force terhadap form login web.
+  Pada soal ini dilakukan analisis terhadap file capture `wired_bruteforce.pcapng` menggunakan Wireshark untuk mengidentifikasi aktivitas brute-force terhadap form login web.
 
 Informasi yang dicari meliputi:
 
@@ -25,7 +22,5 @@ Informasi yang dicari meliputi:
 - Password yang digunakan
 - Web server software beserta versinya
 
-Hasil analisis kemudian divalidasi menggunakan socket server melalui `nc`.
-
----
+Hasil analisis kemudian divalidasi menggunakan socket server melalui `nc [IP_GROUP C] 3401`.
 
