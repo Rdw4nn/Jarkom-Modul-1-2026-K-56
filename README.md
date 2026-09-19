@@ -7,6 +7,18 @@
 
 HAI BOS BEKASI
 
+# S0AL 1
+
+# S0AL 2
+
+# S0AL 3
+
+# S0AL 4
+
+# S0AL 5
+
+# S0AL 6
+
 
 
 
