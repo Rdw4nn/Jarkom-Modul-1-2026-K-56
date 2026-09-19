@@ -307,4 +307,6 @@ Berikut LAngkahnya :
 18. Jawab seluruh pertanyaan dari socket server menggunakan informasi yang telah diperoleh dari hasil analisis Wireshark.
 19. Setelah semua jawaban benar, akan muncul flag:
 
+![image](assets/soal_20.png)
+
     gambar + `flag : Congratulations! Here is your flag: KOMJAR26{...}`
