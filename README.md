@@ -121,59 +121,24 @@ Hasil analisis kemudian divalidasi menggunakan socket server melalui `nc [IP_GRO
 Berikut LAngkahnya :
 1. Open `wired_http_c2.pcap` menggunakan Wireshark.
 2. Karena soal meminta analisis lalu lintas HTTP, input `http` pada **Display Filter**.
-3. Untuk mencari file executable malware yang diunduh, gunakan Display Filter:
-   `http.request.uri contains ".exe"`
-
-4. Dari hasil filter, ditemukan packet dengan request:
-   `GET /navi_agent.exe HTTP/1.1`
-
-5. Buka bagian **Hypertext Transfer Protocol** pada packet tersebut. Dari bagian tersebut dapat ditemukan:
-   `Host: wired-update.net`
-
-   Sehingga nama domain tempat malware diunduh adalah:
-
-   `wired-update.net`
-
-6. Dari packet tersebut juga dapat diketahui alamat IP server penyerang. Pada bagian **Internet Protocol Version 4** terlihat:
-   `Src: 10.7.1.50`
-
-   `Dst: 203.0.113.42`
-
-   Karena request dikirim dari Alice menuju server, maka IP server penyerang adalah:
-
-   `203.0.113.42`
-
-7. Dari request HTTP juga ditemukan nama file executable yang diunduh:
-
-   `navi_agent.exe`
-
-8. Selanjutnya periksa packet response setelah request `GET /navi_agent.exe HTTP/1.1`.
-
-   Pada packet tersebut terdapat:
-
-   `HTTP/1.1 200 OK`
-
-   Sehingga kode status HTTP yang dikembalikan adalah:
-
-   `200 OK`
-
-9. Setelah mendapatkan seluruh informasi yang diperlukan, buka terminal dan jalankan:
-
-   `nc [IP_GROUP] 3404`
-
+3. Untuk mencari file executable malware yang diunduh, gunakan Display Filter : `http.request.uri contains ".exe"`. Dari hasil filter, ditemukan packet dengan request : `GET /navi_agent.exe HTTP/1.1`
+5. Buka bagian **Hypertext Transfer Protocol** pada packet tersebut. Dari bagian tersebut dapat ditemukan : `Host: wired-update.net`
+6. Sehingga nama domain tempat malware diunduh adalah : `wired-update.net`
+7. Dari packet tersebut juga dapat diketahui alamat IP server penyerang. Pada bagian **Internet Protocol Version 4** terlihat : `Src: 10.7.1.50` dan `Dst: 203.0.113.42`
+8. Karena request dikirim dari Alice menuju server, maka IP server penyerang adalah : `203.0.113.42`
+9. Dari request HTTP juga ditemukan nama file executable yang diunduh : `navi_agent.exe`
+10. Selanjutnya periksa packet response setelah request `GET /navi_agent.exe HTTP/1.1`. Pada packet tersebut terdapat : `HTTP/1.1 200 OK`. Sehingga kode status HTTP yang dikembalikan adalah : `200 OK`
+11. Setelah mendapatkan seluruh informasi yang diperlukan, buka terminal dan jalankan : `nc [IP_GROUP] 3404`
    Gunakan `IP_GROUP` yang telah disediakan di mastersheet karena kelompok yang digunakan adalah **Group C**.
-
 10. Jawab seluruh pertanyaan dari socket server menggunakan informasi yang telah diperoleh dari hasil analisis Wireshark.
-
 11. Setelah semua jawaban benar, akan muncul flag:
 
-    `flag : Congratulations! Here is your flag: KOMJAR26{...}`
+    gambar + `flag : Congratulations! Here is your flag: KOMJAR26{...}`
 
 
 # S0AL 18 | SMB Transfer
 
 Pada soal ini dilakukan analisis terhadap file capture `wired_smb_transfer.pcapng` menggunakan Wireshark untuk mengidentifikasi aktivitas transfer file malware melalui protokol SMB.
-
 Informasi yang dicari meliputi:
 
 - Nama protokol jaringan yang dieksploitasi
@@ -183,72 +148,32 @@ Informasi yang dicari meliputi:
 - Nama file executable malware yang ditransfer
 
 Hasil analisis kemudian divalidasi menggunakan socket server melalui `nc [IP_GROUP] 3405`.
-
 Berikut LAngkahnya :
-
 1. Open `wired_smb_transfer.pcapng` menggunakan Wireshark.
-
-2. Karena soal meminta analisis lalu lintas SMB, input `smb2` pada **Display Filter**.
-
-3. Dari hasil filter, terlihat komunikasi menggunakan protokol **SMB2**.
-
+2. Karena soal meminta analisis lalu lintas SMB, input `smb2` pada **Display Filter**. Dari hasil filter, terlihat komunikasi menggunakan protokol **SMB2**.
 4. Untuk melihat proses transfer file, perhatikan packet yang memiliki informasi seperti:
-
    `Create Request`
-
    `Write Request`
-
    `Close Request`
-
-5. Pada packet **Create Request** ditemukan:
-
-   `Create Request, File: System32\wired_trojan_payload.exe`
-
-   Dari informasi tersebut dapat diketahui folder tujuan penyimpanan malware adalah:
-
-   `System32`
-
-6. Pada packet tersebut juga dapat dilihat alamat IP:
-
-   `Src: 10.7.3.100`
-
-   `Dst: 10.7.1.50`
-
+5. Pada packet **Create Request** ditemukan : `Create Request, File: System32\wired_trojan_payload.exe`. Dari informasi tersebut dapat diketahui folder tujuan penyimpanan malware adalah: `System32`
+6. Pada packet tersebut juga dapat dilihat alamat IP : `Src: 10.7.3.100` dan `Dst: 10.7.1.50`
    Namun, untuk menentukan pengirim dan penerima file, perhatikan alur transfer pada packet **Write Request**. File ditransfer dari sistem attacker menuju sistem korban.
-
 7. Dari alur komunikasi SMB pada capture, diperoleh:
 
    - IP Pengirim: `10.7.1.50`
    - IP Penerima: `10.7.3.100`
 
-8. Nama file executable malware yang ditransfer adalah:
-
-   `wired_trojan_payload.exe`
-
-9. Pada proses **Tree Connect** juga terlihat akses ke administrative share:
-
-   `\\10.7.1.50\ADMIN$`
-
-   Kemudian file ditulis pada lokasi:
-
-   `System32\wired_trojan_payload.exe`
-
-10. Setelah mendapatkan seluruh informasi yang diperlukan, buka terminal dan jalankan:
-
-    `nc [IP_GROUP] 3405`
-
+8. Nama file executable malware yang ditransfer adalah : `wired_trojan_payload.exe`
+9. Pada proses **Tree Connect** juga terlihat akses ke administrative share : `\\10.7.1.50\ADMIN$`. Kemudian file ditulis pada lokasi : `System32\wired_trojan_payload.exe`
+10. Setelah mendapatkan seluruh informasi yang diperlukan, buka terminal dan jalankan : `nc [IP_GROUP] 3405`
     Gunakan `IP_GROUP` yang telah disediakan di mastersheet karena kelompok yang digunakan adalah **Group C**.
-
 11. Jawab seluruh pertanyaan dari socket server menggunakan informasi yang telah diperoleh dari hasil analisis Wireshark.
-
 12. Setelah semua jawaban benar, akan muncul flag:
 
-    `flag : Congratulations! Here is your flag: KOMJAR26{...}`
+    gambar + `flag : Congratulations! Here is your flag: KOMJAR26{...}`
 
 # S0AL 19 | SMTP Threat
-
 Pada soal ini dilakukan analisis terhadap file capture `wired_smtp_threat.pcap` menggunakan Wireshark untuk mengidentifikasi email pemerasan yang dikirim oleh attacker melalui protokol SMTP tanpa enkripsi.
-
 Informasi yang dicari meliputi:
 
 - Alamat email korban yang ditargetkan
@@ -258,60 +183,29 @@ Informasi yang dicari meliputi:
 - MailClientID yang tercantum pada pesan
 
 Hasil analisis kemudian divalidasi menggunakan socket server melalui `nc [IP_GROUP] 3406`.
-
 Berikut LAngkahnya :
-
 1. Open `wired_smtp_threat.pcap` menggunakan Wireshark.
-
 2. Karena soal meminta analisis lalu lintas SMTP, input `smtp` pada **Display Filter**.
-
 3. Dari hasil filter, cari packet yang berisi komunikasi SMTP, terutama packet dengan informasi seperti:
-
    `MAIL FROM`
-
    `RCPT TO`
-
    `DATA`
-
 4. Karena email dikirim menggunakan SMTP tanpa enkripsi, isi pesan dapat dianalisis melalui TCP Stream.
-
 5. Klik salah satu packet SMTP yang berkaitan dengan email tersebut, kemudian klik kanan pada packet dan pilih:
-
    **Follow → TCP Stream**
-
-6. Pada TCP Stream, cari bagian isi email setelah perintah:
-
-   `DATA`
-
-   Bagian tersebut berisi pesan pemerasan yang dikirim oleh attacker kepada korban.
-
-7. Dari isi pesan tersebut, identifikasi alamat email korban yang ditargetkan.
-
-8. Selanjutnya cari informasi password korban yang diklaim bocor oleh penyerang di dalam isi pesan.
-
-9. Cari juga informasi mengenai jenis malware yang disebutkan telah menginfeksi sistem korban.
-
+6. Pada TCP Stream, cari bagian isi email setelah perintah : `DATA`. Bagian tersebut berisi pesan pemerasan yang dikirim oleh attacker kepada korban. Dari isi pesan tersebut, identifikasi alamat email korban yang ditargetkan.
+8. Selanjutnya cari informasi password korban yang diklaim bocor oleh penyerang di dalam isi pesan dan Cari juga informasi mengenai jenis malware yang disebutkan telah menginfeksi sistem korban.
 10. Identifikasi batas waktu yang diberikan oleh penyerang kepada korban. Catat nilainya dalam satuan hari.
-
 11. Pada isi email juga terdapat `MailClientID`. Catat nilai `MailClientID` tersebut sesuai dengan yang tercantum pada pesan.
-
-12. Setelah mendapatkan seluruh informasi yang diperlukan, buka terminal dan jalankan:
-
-    `nc [IP_GROUP] 3406`
-
+12. Setelah mendapatkan seluruh informasi yang diperlukan, buka terminal dan jalankan : `nc [IP_GROUP] 3406`
     Gunakan `IP_GROUP` yang telah disediakan di mastersheet karena kelompok yang digunakan adalah **Group C**.
-
 13. Jawab seluruh pertanyaan dari socket server menggunakan informasi yang telah diperoleh dari analisis TCP Stream pada Wireshark.
-
 14. Setelah semua jawaban benar, akan muncul flag:
 
-    `flag : Congratulations! Here is your flag: KOMJAR26{...}`
+    gambar + `flag : Congratulations! Here is your flag: KOMJAR26{...}`
 
-
-    # S0AL 20 | TLS Decrypt
-
+# S0AL 20 | TLS Decrypt
 Pada soal ini dilakukan analisis terhadap file capture `wired_tls_decrypt.pcapng` menggunakan Wireshark dengan bantuan `keyslogfile.txt` untuk mendekripsi lalu lintas TLS dan mengidentifikasi komunikasi HTTP yang tersembunyi di dalam sesi terenkripsi.
-
 Informasi yang dicari meliputi:
 
 - Versi protokol TLS yang dinegosiasikan
@@ -322,50 +216,25 @@ Informasi yang dicari meliputi:
 - HTTP request path
 
 Hasil analisis kemudian divalidasi menggunakan socket server melalui `nc [IP_GROUP] 3407`.
-
 Berikut LAngkahnya :
-
 0. Jangan lupa input keylogsfile.txt nya dulu nanti yeu (liat gpt langkahnya - pesan untuk gw)
-
 1. Open `wired_tls_decrypt.pcapng` menggunakan Wireshark.
-
 2. Karena soal meminta analisis lalu lintas TLS, input `tls` pada **Display Filter**.
-
 3. Dari packet **Client Hello**, dapat dilihat informasi **Server Name (SNI)** yang diakses oleh client.
-
-4. Pada packet **Client Hello** ditemukan:
-
-   `Client Hello (SNI=example.com)`
-
-   Sehingga nama domain yang diakses adalah:
-
-   `example.com`
-
+4. Pada packet **Client Hello** ditemukan : `Client Hello (SNI=example.com)`. Sehingga nama domain yang diakses adalah : `example.com`
 5. Dari bagian **Internet Protocol Version 4** pada packet TLS dapat diketahui alamat IP server HTTPS.
-
    Source:
-
    `10.9.0.2`
-
    Destination:
-
    `93.184.216.34`
-
    Sehingga IP server HTTPS adalah:
-
    `93.184.216.34`
+6. Dari hasil analisis packet TLS juga diketahui versi protokol yang digunakan : `TLSv1.2`. Karena isi HTTP berada di dalam koneksi TLS, diperlukan file keylog untuk melakukan dekripsi.
 
-6. Dari hasil analisis packet TLS juga diketahui versi protokol yang digunakan:
-
-   `TLSv1.2`
-
-7. Karena isi HTTP berada di dalam koneksi TLS, diperlukan file keylog untuk melakukan dekripsi.
-
-8. Buka:
-
-   **Edit → Preferences → Protocols → TLS**
-
-9. Pada bagian:
+---
+     ini gataw mw di pake atau ngga!
+9. Buka : **Edit → Preferences → Protocols → TLS**
+10. Pada bagian:
 
    **(Pre)-Master-Secret log filename**
 
@@ -373,31 +242,22 @@ Berikut LAngkahnya :
 
    `keyslogfile.txt`
 
-10. Klik **OK**, kemudian reload atau buka kembali file:
+   11. Klik **OK**, kemudian reload atau buka kembali file:
 
     `wired_tls_decrypt.pcapng`
 
-11. Setelah keylog berhasil digunakan, masukkan `http` pada **Display Filter** untuk menampilkan lalu lintas HTTP yang telah berhasil didekripsi.
+---
 
-12. Pilih packet **HTTP Request**, kemudian buka bagian **Hypertext Transfer Protocol**.
-
-13. Dari bagian tersebut dapat ditemukan **User-Agent** yang digunakan oleh client.
-
-14. Pada bagian HTTP Request juga dapat diketahui:
-
+12. Setelah keylog berhasil digunakan, masukkan `http` pada **Display Filter** untuk menampilkan lalu lintas HTTP yang telah berhasil didekripsi.
+13. Pilih packet **HTTP Request**, kemudian buka bagian **Hypertext Transfer Protocol**.
+14. Dari bagian tersebut dapat ditemukan **User-Agent** yang digunakan oleh client.
+15. Pada bagian HTTP Request juga dapat diketahui:
     - HTTP Request Method
     - HTTP Request URI / Path
-
-15. Catat seluruh informasi yang diperlukan sesuai dengan pertanyaan pada socket server.
-
-16. Setelah mendapatkan seluruh informasi, buka terminal dan jalankan:
-
-    `nc [IP_GROUP] 3407`
-
+16. Catat seluruh informasi yang diperlukan sesuai dengan pertanyaan pada socket server.
+17. Setelah mendapatkan seluruh informasi, buka terminal dan jalankan : `nc [IP_GROUP] 3407`
     Gunakan `IP_GROUP` yang telah disediakan di mastersheet karena kelompok yang digunakan adalah **Group C**.
+18. Jawab seluruh pertanyaan dari socket server menggunakan informasi yang telah diperoleh dari hasil analisis Wireshark.
+19. Setelah semua jawaban benar, akan muncul flag:
 
-17. Jawab seluruh pertanyaan dari socket server menggunakan informasi yang telah diperoleh dari hasil analisis Wireshark.
-
-18. Setelah semua jawaban benar, akan muncul flag:
-
-    `flag : Congratulations! Here is your flag: KOMJAR26{...}`
+    gambar + `flag : Congratulations! Here is your flag: KOMJAR26{...}`
