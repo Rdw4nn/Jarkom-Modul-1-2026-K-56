@@ -7,11 +7,41 @@
 
 HAI BOS BEKASI
 
-# S0AL 1
+## Laporan
+### No 1
+---
+"Lain yang berperan sebagai Router membuat tiga Switch/Gateway:
+-  Switch 1 menuju dua Entitas yaitu Alice dan Mika
+- Switch 2 menuju Chisa
+- Switch 3 menuju Knights dan Eiri"
 
-# S0AL 2
+![alt text](image.png)
 
-# S0AL 3
+Pada soal ini dibuatnya topologi jaringan sesuai dengan yang diminta di soal, seperti beberapa konfigurasi berikut:
+- NAT : untuk mendapatkan dynamic ip dhcp  dan bisa terkoneksi ke internet
+- Router Lain : sebagai networking yang tersambung dengan NAT, menggunakan debinet
+- Switch 1, 2, dan 3 : sebagai gateway antar client yang terkoneksi ke router
+- Client (Alice, Mika, Chisa, Knights, dan Eiri) : client yang terhubung dalam topologi jaringan.
+
+### No 2
+---
+"Konfigurasi router Lain agar tersambung ke jaringan internet publik melalui NAT/DHCP pada interface eth0"
+
+Agar Lain (router) terkoneksi, kita harus melakukan configure terhadap interface Lain yang terhubung ke NAT. Masukkan konfigurasi ke Network configurationnya :
+
+```
+auto eth0
+iface eth0 inet dhcp
+```
+![alt text](image-1.png)
+
+Bertujuan untuk melakukan setup interface eth0 yang terhubung ke NAT
+
+![alt text](image-2.png)
+
+### No 3
+---
+"Setelah terhubung ke internet. hubungkan client dari tiap switch sehingga dapat berkomunikasi satu sama lain melalui konfigurasi"
 
 # S0AL 4
 
@@ -22,7 +52,8 @@ HAI BOS BEKASI
 
 
 
-# S0AL 14 | PROtocol 7
+### S0AL 14 | PROtocol 7
+---
   Pada soal ini dilakukan analisis terhadap file capture `wired_bruteforce.pcapng` menggunakan Wireshark untuk mengidentifikasi aktivitas brute-force terhadap form login web.
 
 Informasi yang dicari meliputi:
@@ -46,7 +77,8 @@ Berikut LAngkahnya :
 7. nanti gambar + `flag : Congratulations! Here is your flag: KOMJAR26{W1r3d_Brut3_1bBmXXuaxjlV9hNvBrTk60Bcl} `
 
 
-# S0AL 15 | USB HID
+### S0AL 15 | USB HID
+---
 
 Pada soal ini dilakukan analisis terhadap file capture `wired_usb_hid.pcap` menggunakan Wireshark untuk mengidentifikasi perangkat USB keyboard berbahaya yang digunakan untuk mencuri keystroke.
 
@@ -83,7 +115,8 @@ Berikut LAngkahnya :
 12. gambar + flag boom!
 
 
-# S0AL 16 | FTP Theft
+### S0AL 16 | FTP Theft
+---
 
 Pada soal ini dilakukan analisis terhadap file capture `wired_ftp_theft.pcapng` menggunakan Wireshark untuk mengidentifikasi aktivitas FTP yang dilakukan oleh attacker dan file malware yang diunduh.
 
@@ -118,7 +151,8 @@ Berikut LAngkahnya :
     `flag : Congratulations! Here is your flag: KOMJAR26{...}`
 
 
-# S0AL 17 | HTTP C2
+### S0AL 17 | HTTP C2
+---
 
 Pada soal ini dilakukan analisis terhadap file capture `wired_http_c2.pcap` menggunakan Wireshark untuk mengidentifikasi aktivitas HTTP yang dilakukan oleh attacker dalam mengunduh payload berbahaya ke sistem Alice.
 Informasi yang dicari meliputi:
@@ -148,7 +182,8 @@ Berikut LAngkahnya :
     gambar + `flag : Congratulations! Here is your flag: KOMJAR26{...}`
 
 
-# S0AL 18 | SMB Transfer
+### S0AL 18 | SMB Transfer
+---
 
 Pada soal ini dilakukan analisis terhadap file capture `wired_smb_transfer.pcapng` menggunakan Wireshark untuk mengidentifikasi aktivitas transfer file malware melalui protokol SMB.
 Informasi yang dicari meliputi:
