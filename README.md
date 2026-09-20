@@ -262,9 +262,13 @@ Di Wireshark filter ftp || ftp-data, cari perintah STOR laporan_intelijen.txt, r
 
 ```
 # MIKA
-apk add ftp
-ftp 192.239.2.2
-# user: mika / mika123
+apk add lftp
+lftp 192.239.2.2\
+
+user mika
+ls
+get protocol7_manifesto.zip
+put file_baru.txt
 ```
 <img src="assets/soal9_1.png" width="450">
 
@@ -290,7 +294,8 @@ Di Wireshark filter icmp, catat Type 8 (Echo Request) dari Knights dan Type 0 (E
 ```
 # CHISA
 apk add busybox-extras
-adduser phantom_user   # password: wired_ghost
+adduser phantom_user
+# masukkan password: wired_ghost
 telnetd -p 23 &
 
 # EIRI
@@ -326,24 +331,50 @@ Di Wireshark: port terbuka (22, 80) → handshake normal SYN → SYN-ACK → ACK
 "Lain memerintahkan administrasi jarak jauh via SSH tanpa password. Setup key-based authentication antara Mika (mika_admin) dan Knights, lalu jelaskan perbedaan dengan Telnet."
 
 ```
-# KNIGHTS
+# KNIGHTS (server tujuan)
 apk add openssh
 ssh-keygen -A
 adduser -D mika_admin
-nano /home/mika_admin/.ssh/authorized_keys
-
+mkdir -p /home/mika_admin/.ssh
 sed -i 's/^#*PasswordAuthentication.*/PasswordAuthentication no/' /etc/ssh/sshd_config
 /usr/sbin/sshd
 
-# MIKA
+# MIKA (client, tetap sebagai root, JANGAN su ke mika_admin)
 apk add openssh-client
-su - mika_admin
 ssh-keygen -t ed25519
+# Enter semua (biarkan default, tanpa passphrase)
 cat ~/.ssh/id_ed25519.pub
+
+# KNIGHTS — paste public key Mika di sini
+echo "<paste_public_key_mika_disini>" >> /home/mika_admin/.ssh/authorized_keys
+chown -R mika_admin:mika_admin /home/mika_admin/.ssh
+chmod 700 /home/mika_admin/.ssh
+chmod 600 /home/mika_admin/.ssh/authorized_keys
+
+# MIKA — connect (masih sebagai root, tapi login sebagai mika_admin di remote)
 ssh mika_admin@192.239.3.2
 
 # Wireshark
 # tcp.port == 22
+```
+
+
+```
+# Knights
+sed -i 's/^PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config
+pkill sshd
+/usr/sbin/sshd
+
+# Mika
+cat ~/.ssh/id_ed25519.pub | ssh mika_admin@192.239.3.2 "mkdir -p ~/.ssh && chmod 700 ~/.ssh && cat >> ~/.ssh/authorized_keys && chmod 600 ~/.ssh/authorized_keys"
+
+# Knights
+sed -i 's/^PasswordAuthentication yes/PasswordAuthentication no/' /etc/ssh/sshd_config
+pkill sshd
+/usr/sbin/sshd
+
+#Mika
+ssh mika_admin@192.239.3.2
 ```
 
 Filter tcp.port == 22, identifikasi paket Protocol Version Exchange (baris pertama pertukaran versi SSH client/server) dan Key Exchange Init (SSH_MSG_KEXINIT). Setelah key exchange selesai, seluruh sesi termasuk autentikasi terenkripsi — berbeda dengan Telnet yang mengirim semuanya plain text.
