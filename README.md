@@ -1,9 +1,9 @@
 # Jarkom-Modul-1-2026-K-56
 
-| No  | Nama                           | NRP        |
-| --- | ------------------------------ | ---------- |
-| 1   | Sahira Bilqis Rivadito         | 5027251037 |
-| 2   | Muhammmad Ridwan               | 5027251113 |
+| No  | Nama                           | NRP        | Pengerjaan |
+| --- | ------------------------------ | ---------- | ---------- |
+| 1   | Sahira Bilqis Rivadito         | 5027251037 | No 1-13    |
+| 2   | Muhammmad Ridwan               | 5027251113 | No 14-20   |
 
 HAI BOS BEKASI
 
