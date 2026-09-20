@@ -222,6 +222,9 @@ vsftpd /etc/vsftpd/vsftpd.conf &
 # Cek FTP Server pada port 21
 busybox netstat -lnt | grep ':21'
 
+apk add lftp
+lftp 192.239.2.2
+
 put signal_alice.txt
 ls
 get signal_alice.txt
