@@ -89,7 +89,15 @@ iface eth0 inet static
     gateway 192.239.3.1
 ```
 
-1[image](assets/soal3_1.png)
+<img src="assets/soal3_1.png" width="450">
+
+<img src="assets/soal3_2.png" width="450">
+
+<img src="assets/soal3_3.png" width="450">
+
+<img src="assets/soal3_4.png" width="450">
+
+<img src="assets/soal3_5.png" width="450">
 
 # S0AL 4
 ---
@@ -256,8 +264,6 @@ ls
 
 Di Wireshark filter ftp || ftp-data, cari perintah STOR laporan_intelijen.txt, response 226 Transfer complete, dan port data hasil negosiasi PASV (di paket response 227 Entering Passive Mode).
 
-<img src="assets/soal8_1.png" width="450">
-
 ### No 9
 ---
 
@@ -289,6 +295,8 @@ Di Wireshark filter icmp, catat Type 8 (Echo Request) dari Knights dan Type 0 (E
 
 <img src="assets/soal10_1.png" width="450">
 
+<img src="assets/soal10_2.png" width="450">
+
 ### No 11
 ---
 
@@ -310,6 +318,8 @@ Capture di link Eiri↔Switch3, filter telnet, klik kanan salah satu paket → F
 
 <img src="assets/soal11_1.png" width="450">
 
+<img src="assets/soal11_2.png" width="450">
+
 ### No 12
 ---
 
@@ -327,7 +337,13 @@ nc -zv 192.239.3.2 22 80 7777
 
 Di Wireshark: port terbuka (22, 80) → handshake normal SYN → SYN-ACK → ACK. Port tertutup (7777) → SYN → RST-ACK (langsung ditolak karena tidak ada service listening).
 
+Pada port yang terbuka, seperti port 22 dan port 80, client terlebih dahulu mengirimkan paket SYN untuk memulai koneksi. Server kemudian merespons dengan paket SYN, ACK, yang menandakan bahwa port tersebut aktif dan terdapat service yang sedang berjalan. Setelah itu, client mengirimkan ACK sehingga terbentuk proses TCP three-way handshake dan koneksi berhasil dibuat. (No. 23–25 untuk open port 22 & No. 31 & 34 untuk closed port 7777).
+
+Sebaliknya, pada port yang tertutup seperti port 7777, client tetap mengirimkan paket SYN untuk mencoba membuka koneksi. Namun server tidak membalas dengan SYN, ACK, melainkan dengan RST, ACK. Flag RST (Reset) menunjukkan bahwa host server dapat dijangkau, tetapi tidak ada service yang sedang listening pada port tersebut sehingga koneksi langsung ditolak.
+
 <img src="assets/soal12_1.png" width="450">
+
+<img src="assets/soal12_2.png" width="450">
 
 ### No 13
 ---
@@ -382,7 +398,13 @@ ssh mika_admin@192.239.3.2
 
 Filter tcp.port == 22, identifikasi paket Protocol Version Exchange (baris pertama pertukaran versi SSH client/server) dan Key Exchange Init (SSH_MSG_KEXINIT). Setelah key exchange selesai, seluruh sesi termasuk autentikasi terenkripsi — berbeda dengan Telnet yang mengirim semuanya plain text.
 
+Koneksi SSH dilakukan dari Mika (192.239.1.2) menuju Knights (192.239.3.2) melalui port 22. Setelah TCP handshake selesai, terjadi Protocol Version Exchange pada paket No. 6 dan No. 8, yang menunjukkan kedua perangkat menggunakan SSH-2.0-OpenSSH_10.2. Terus terjadi Key Exchange pada paket No. 11 dan No. 14, kemudian dilanjutkan proses pertukaran kunci pada No. 15–16 hingga muncul New Keys. Setelah tahap ini, paket berikutnya ditampilkan sebagai Encrypted packet mulai No. 17 dan seterusnya. Pada Follow TCP Stream, yang dapat terbaca hanya informasi awal seperti versi SSH dan algoritma yang digunakan. Setelah proses Key Exchange, isi komunikasi berubah menjadi data yang tidak terbaca. Karena SSH mengenkripsi sesi sebelum proses autentikasi dan pertukaran data, username, password, serta command tidak terlihat dalam bentuk plaintext, berbeda dengan Telnet yang mengirimkan data tanpa enkripsi.
+
 <img src="assets/soal13_1.png" width="450">
+
+<img src="assets/soal13_2.png" width="450">
+
+<img src="assets/soal13_3.png" width="450">
 
 ### S0AL 14 | PROtocol 7
 ---
