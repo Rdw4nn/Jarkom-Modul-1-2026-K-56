@@ -221,6 +221,10 @@ vsftpd /etc/vsftpd/vsftpd.conf &
 
 # Cek FTP Server pada port 21
 busybox netstat -lnt | grep ':21'
+
+put signal_alice.txt
+ls
+get signal_alice.txt
 ```
 
 <img src="assets/soal7_1.png" alt="login mike" width="450">
@@ -236,10 +240,16 @@ busybox netstat -lnt | grep ':21'
 
 ```
 # KNIGHTS
-apk add ftp
-ftp 192.239.2.2
-# user: alice / alice123
+cd 8
+lftp 192.239.2.2
+user alice
+set ftp:passive-mode true
+put knights_report.zip
+ls
 ```
+
+<img width="726" height="258" alt="image" src="https://github.com/user-attachments/assets/07260edb-f62f-448d-a55e-67102a9ad143" />
+
 
 Di Wireshark filter ftp || ftp-data, cari perintah STOR laporan_intelijen.txt, response 226 Transfer complete, dan port data hasil negosiasi PASV (di paket response 227 Entering Passive Mode).
 
