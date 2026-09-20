@@ -364,8 +364,8 @@ Berikut LAngkahnya :
 
 7. nanti gambar + `flag : Congratulations! Here is your flag: KOMJAR26{W1r3d_Brut3_1bBmXXuaxjlV9hNvBrTk60Bcl} `
 
-![image](assets/soal14.png)
-![image](assets/soal14.1.png)
+![image](assets/soal_14.png)
+![image](assets/soal_14.1.png)
 
 ### S0AL 15 | USB HID
 ---
@@ -400,10 +400,10 @@ Berikut LAngkahnya :
 
 11. Jawab seluruh pertanyaan dari socket server menggunakan informasi yang telah diperoleh dari hasil analisis Wireshark.
 
-![image](assets/soal15.png)
-![image](assets/soal15.1.png)
-![image](assets/soal15.2.png)
-![image](assets/soal15.3.png)
+![image](assets/soal_15.png)
+![image](assets/soal_15.1.png)
+![image](assets/soal_15.2.png)
+![image](assets/soal_15.3.png)
 
     `flag : Congratulations! Here is your flag: KOMJAR26{...}`
 
@@ -441,7 +441,7 @@ Berikut LAngkahnya :
 14. Jawab seluruh pertanyaan dari socket server menggunakan informasi yang telah diperoleh dari hasil analisis Wireshark.
 15. Setelah semua jawaban benar, akan muncul flag:
 
-![image](assets/soal16.png)
+![image](assets/soal_16.png)
 
     `flag : Congratulations! Here is your flag: KOMJAR26{...}`
 
@@ -474,7 +474,7 @@ Berikut LAngkahnya :
 10. Jawab seluruh pertanyaan dari socket server menggunakan informasi yang telah diperoleh dari hasil analisis Wireshark.
 11. Setelah semua jawaban benar, akan muncul flag:
 
-![image](assets/soal17.png)
+![image](assets/soal_17.png)
 
     gambar + `flag : Congratulations! Here is your flag: KOMJAR26{...}`
 
@@ -514,7 +514,7 @@ Berikut LAngkahnya :
 11. Jawab seluruh pertanyaan dari socket server menggunakan informasi yang telah diperoleh dari hasil analisis Wireshark.
 12. Setelah semua jawaban benar, akan muncul flag:
 
-![image](assets/soal18.png)
+![image](assets/soal_18.png)
 
     gambar + `flag : Congratulations! Here is your flag: KOMJAR26{...}`
 
@@ -548,7 +548,7 @@ Berikut LAngkahnya :
 13. Jawab seluruh pertanyaan dari socket server menggunakan informasi yang telah diperoleh dari analisis TCP Stream pada Wireshark.
 14. Setelah semua jawaban benar, akan muncul flag:
 
-![image](assets/soal19.png)
+![image](assets/soal_19.png)
 
     gambar + `flag : Congratulations! Here is your flag: KOMJAR26{...}`
 
