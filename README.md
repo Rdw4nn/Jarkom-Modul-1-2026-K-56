@@ -15,7 +15,7 @@ HAI BOS BEKASI
 - Switch 2 menuju Chisa
 - Switch 3 menuju Knights dan Eiri"
 
-<img src="assets/soal1_1.png" width="450">
+![image](assets/soal1_1.png)
 
 Pada soal ini dibuatnya topologi jaringan sesuai dengan yang diminta di soal, seperti beberapa konfigurasi berikut:
 - NAT : untuk mendapatkan dynamic ip dhcp  dan bisa terkoneksi ke internet
@@ -33,11 +33,11 @@ Agar Lain (router) terkoneksi, kita harus melakukan configure terhadap interface
 auto eth0
 iface eth0 inet dhcp
 ```
-<img src="assets/soal2_1.png" width="450">
+![image](assets/soal2.1.png)
 
 Bertujuan untuk melakukan setup interface eth0 yang terhubung ke NAT
 
-<img src="assets/soal2_2.png" width="450">
+![image](assets/soal2.2.png)
 
 ### No 3
 ---
