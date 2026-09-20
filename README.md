@@ -400,10 +400,10 @@ Berikut LAngkahnya :
 
 11. Jawab seluruh pertanyaan dari socket server menggunakan informasi yang telah diperoleh dari hasil analisis Wireshark.
 
-![image](assets/soal_15.png)
 ![image](assets/soal_15.1.png)
 ![image](assets/soal_15.2.png)
 ![image](assets/soal_15.3.png)
+![image](assets/soal_15.png)
 
     `flag : Congratulations! Here is your flag: KOMJAR26{...}`
 
