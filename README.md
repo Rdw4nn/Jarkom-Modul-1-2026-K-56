@@ -33,11 +33,11 @@ Agar Lain (router) terkoneksi, kita harus melakukan configure terhadap interface
 auto eth0
 iface eth0 inet dhcp
 ```
-![image](assets/soal2.1.png)
+![image](assets/soal2_1.png)
 
 Bertujuan untuk melakukan setup interface eth0 yang terhubung ke NAT
 
-![image](assets/soal2.2.png)
+![image](assets/soal2_2.png)
 
 ### No 3
 ---
