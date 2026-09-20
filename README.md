@@ -391,7 +391,7 @@ Berikut LAngkahnya :
 5. Untuk mencari alamat perangkat USB, gunakan Display Filter: `usb.device_address != 0`
 6. Dari hasil filter tersebut, ditemukan **Device Address = 7**. Alamat ini digunakan untuk memfokuskan analisis terhadap komunikasi perangkat USB tersebut.
 7. Untuk melihat data keystroke, fokus pada packet **URB_INTERRUPT in** dari perangkat dengan Device Address 7. Kemudian buka bagian **USB URB** dan cari **Leftover Capture Data**. 
-8. Untuk melihat nya lebih mudah, klik kanan pada **Leftover Capture Data**, kemudian **Apply as column** atau ke menu file pojok kiri atas kemudian **Export Packet dissection** kemudian put ke AI suruh focus Decode Capture data nya ><
+9. Untuk merekonstruksi left over capture data kami menggunakan GitHub nya beliau, cloning. https://github.com/RajChowdhury240/usb-keystrokes-ctf-tool
 10. Setelah mendapatkan seluruh informasi yang diperlukan, buka terminal dan jalankan:
 
     `nc [IP_GROUP C] 3402`
