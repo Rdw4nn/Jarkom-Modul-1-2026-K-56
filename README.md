@@ -89,7 +89,7 @@ iface eth0 inet static
     gateway 192.239.3.1
 ```
 
-<img src="assets/soal3_1.png" alt="ping -c4 192.239.2.2" width="450">
+1[image](assets/soal3_1.png)
 
 # S0AL 4
 ---
